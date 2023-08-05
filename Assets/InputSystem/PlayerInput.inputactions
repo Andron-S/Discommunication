@@ -15,18 +15,18 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Range",
+                    "name": "Attack",
                     "type": "Button",
-                    "id": "ecb25267-d1c5-43f5-86bc-268c79b914ca",
+                    "id": "000a56bb-7ef1-4026-99ef-39a2ae99746b",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Melee",
+                    "name": "EatAbility",
                     "type": "Button",
-                    "id": "000a56bb-7ef1-4026-99ef-39a2ae99746b",
+                    "id": "603a1e16-4a71-4085-99f1-abb330722805",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -34,17 +34,6 @@
                 }
             ],
             "bindings": [
-                {
-                    "name": "",
-                    "id": "bfc19a87-8ed6-4efb-a0b9-f01e80858f65",
-                    "path": "<Mouse>/leftButton",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard and Mouse",
-                    "action": "Range",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
                 {
                     "name": "2D Vector",
                     "id": "c996eecb-eef4-4426-b2e1-0c85eb802ecb",
@@ -103,11 +92,22 @@
                 {
                     "name": "",
                     "id": "72e7cde0-7c10-40fe-9ff1-2e7d6ddab0be",
-                    "path": "<Mouse>/rightButton",
+                    "path": "<Mouse>/leftButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard and Mouse",
-                    "action": "Melee",
+                    "action": "Attack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "bfe3212f-8c3c-44de-931d-b486c166f3bd",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "EatAbility",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

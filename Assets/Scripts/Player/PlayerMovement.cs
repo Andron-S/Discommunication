@@ -3,16 +3,17 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Rigidbody2D), typeof(Collider2D))]
 public class PlayerMovement : PlayerControl
 {
     [SerializeField] private float _speed;
 
-    protected Rigidbody2D _rigidbody2D;
-    protected Transform _transform;
-    protected Vector2 _direction;
-    protected Vector2 _move;
+    private Rigidbody2D _rigidbody2D;
+    private Transform _transform;
+    private Vector2 _direction;
+    private Vector2 _move;
 
     public override void Awake()
     {
@@ -21,7 +22,7 @@ public class PlayerMovement : PlayerControl
         _rigidbody2D = GetComponent<Rigidbody2D>();
         _transform = GetComponent<Transform>();
 
-        PlayerInput.Player.Move.performed += movementContext => GetDirection();
+        Input.Player.Move.performed += movementContext => GetDirection();
     }
 
     private void Start()
@@ -37,9 +38,11 @@ public class PlayerMovement : PlayerControl
         Rotate();
     }
 
+    public float Speed { get => _speed; set => _speed = value; }
+
     private void GetDirection()
     {
-        _direction = PlayerInput.Player.Move.ReadValue<Vector2>();
+        _direction = Input.Player.Move.ReadValue<Vector2>();
     }
 
     private void Move()

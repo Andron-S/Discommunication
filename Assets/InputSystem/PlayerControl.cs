@@ -2,23 +2,29 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class PlayerControl : MonoBehaviour
+public class PlayerControl : MonoBehaviour
 {
-    protected PlayerInput PlayerInput;
+    protected PlayerInput Input;
+    private Player _player;
 
     public virtual void Awake()
     {
-        PlayerInput = new PlayerInput();
-        PlayerInput.Player.Enable();
+        _player = GetComponent<Player>();
+
+        Input = new PlayerInput();
+        Input.Player.Enable();
+
+        Input.Player.Attack.performed += rangeContext => _player.Attack();
+        Input.Player.EatAbility.performed += eatContext => _player.EatAbility();
     }
 
     private void OnEnable()
     {
-        PlayerInput.Enable();
+        Input.Enable();
     }
 
     private void OnDisable()
     {
-        PlayerInput.Disable();
+        Input.Disable();
     }
 }
