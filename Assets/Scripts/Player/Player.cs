@@ -1,4 +1,4 @@
-using Assets;
+п»їusing Assets;
 
 using System;
 using System.Collections;
@@ -6,13 +6,16 @@ using System.Collections.Generic;
 
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour, IAttackable, IDamageable
 {
     [SerializeField] private float _healthPoints;
     [SerializeField] private float _attackDelay;
+    [SerializeField] private Image _healthBar;
 
     private bool _isAttackCooldowned;
+    private float _maxHealth = 100;
 
     public static event Action<float> OnHealthPointsChanged;
 
@@ -31,7 +34,7 @@ public class Player : MonoBehaviour, IAttackable, IDamageable
             return;
         }
 
-        Debug.Log("Активация способности кусать");
+        Debug.Log("ГЂГЄГІГЁГўГ Г¶ГЁГї Г±ГЇГ®Г±Г®ГЎГ­Г®Г±ГІГЁ ГЄГіГ±Г ГІГј");
 
         _isAttackCooldowned = false;
         var attackDelayCorutine = StartCoroutine(CalculatingAttackDelay());
@@ -39,8 +42,8 @@ public class Player : MonoBehaviour, IAttackable, IDamageable
 
     public void Attack()
     {
-        Debug.Log("Атака оружием");
-        // вызвать метод атаки у класса Оружия
+        Debug.Log("ГЂГІГ ГЄГ  Г®Г°ГіГ¦ГЁГҐГ¬");
+        // ГўГ»Г§ГўГ ГІГј Г¬ГҐГІГ®Г¤ Г ГІГ ГЄГЁ Гі ГЄГ«Г Г±Г±Г  ГЋГ°ГіГ¦ГЁГї
     }
 
     public IEnumerator CalculatingAttackDelay()
@@ -54,7 +57,7 @@ public class Player : MonoBehaviour, IAttackable, IDamageable
     {
 
         OnHealthPointsChanged?.Invoke(_healthPoints);
-
+        _healthBar.fillAmount = _healthPoints / _maxHealth;
         if (_healthPoints <= 0)
         {
             Die();
@@ -64,6 +67,7 @@ public class Player : MonoBehaviour, IAttackable, IDamageable
 
     public void Die()
     {
+        //TODO: РІС‹Р·РІР°С‚СЊ РјРµРЅСЋ
         GameEventManager.ReloadCurrentScene();
     }
 
