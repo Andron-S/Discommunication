@@ -4,8 +4,9 @@ using UnityEngine;
 
 public abstract class Weapon : MonoBehaviour, IAttackable
 {
-    [SerializeField] private float _damage;
-    [SerializeField] private float _durable;
-    [SerializeField] public abstract void Attack();
+    [SerializeField] protected float _damage;
+    [SerializeField] protected float _durable;
+
+    public abstract void Attack();
     public abstract IEnumerator CalculatingAttackDelay();
 }

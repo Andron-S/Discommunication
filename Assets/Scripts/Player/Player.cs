@@ -11,38 +11,21 @@ public class Player : MonoBehaviour, IAttackable, IDamageable
     public static event Action<float> OnHealthPointsChanged;
 
     private PlayerMovement _playerMovement;
-    //Weapon
+    private Weapon _weapon;
 
     private void Start()
     {
         _playerMovement = GetComponent<PlayerMovement>();
     }
 
-    public void GetDamage(float damage)
-    {
-
-        
-        OnHealthPointsChanged?.Invoke(_healthPoints);
-    }
-
-    //public int Attack()
-    //{
-        
-    //}
-
     public void EatAbility()
     {
-
-    }
-
-    private void GetWeapon()
-    {
-
+        // написать логику
     }
 
     public void Attack()
     {
-        throw new NotImplementedException();
+        _weapon.Attack();
     }
 
     public IEnumerator CalculatingAttackDelay()
@@ -52,11 +35,18 @@ public class Player : MonoBehaviour, IAttackable, IDamageable
 
     public void TakeDamage(float damage)
     {
-        throw new NotImplementedException();
+
+
+        OnHealthPointsChanged?.Invoke(_healthPoints);
     }
 
     public void Die()
     {
         throw new NotImplementedException();
+    }
+
+    private void GetWeapon()
+    {
+
     }
 }
