@@ -1,8 +1,11 @@
 using Assets;
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
+
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour, IAttackable, IDamageable
 {
@@ -23,7 +26,7 @@ public class Player : MonoBehaviour, IAttackable, IDamageable
 
     public void EatAbility()
     {
-        if(_isAttackCooldowned == false)
+        if (_isAttackCooldowned == false)
         {
             return;
         }
@@ -41,7 +44,7 @@ public class Player : MonoBehaviour, IAttackable, IDamageable
     }
 
     public IEnumerator CalculatingAttackDelay()
-    { 
+    {
         yield return new WaitForSeconds(_attackDelay);
 
         _isAttackCooldowned = true;
@@ -52,7 +55,7 @@ public class Player : MonoBehaviour, IAttackable, IDamageable
 
         OnHealthPointsChanged?.Invoke(_healthPoints);
 
-        if(_healthPoints <= 0)
+        if (_healthPoints <= 0)
         {
             Die();
         }
