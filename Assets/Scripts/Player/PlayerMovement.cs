@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Rigidbody2D), typeof(Collider2D))]
 public class PlayerMovement : PlayerControl
@@ -21,7 +22,7 @@ public class PlayerMovement : PlayerControl
         _rigidbody2D = GetComponent<Rigidbody2D>();
         _transform = GetComponent<Transform>();
 
-        PlayerInput.Player.Move.performed += movementContext => GetDirection();
+        Input.Player.Move.performed += movementContext => GetDirection();
     }
 
     private void Start()
@@ -41,7 +42,7 @@ public class PlayerMovement : PlayerControl
 
     private void GetDirection()
     {
-        _direction = PlayerInput.Player.Move.ReadValue<Vector2>();
+        _direction = Input.Player.Move.ReadValue<Vector2>();
     }
 
     private void Move()

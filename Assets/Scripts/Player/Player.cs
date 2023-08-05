@@ -10,22 +10,20 @@ public class Player : MonoBehaviour, IAttackable, IDamageable
 
     public static event Action<float> OnHealthPointsChanged;
 
-    private PlayerMovement _playerMovement;
-    private Weapon _weapon;
-
     private void Start()
     {
-        _playerMovement = GetComponent<PlayerMovement>();
+        
     }
 
     public void EatAbility()
     {
-        // написать логику
+        Debug.Log("Активация способности кусать");
     }
 
     public void Attack()
     {
-        _weapon.Attack();
+        Debug.Log("Атака оружием");
+        // вызвать метод атаки у класса Оружия
     }
 
     public IEnumerator CalculatingAttackDelay()
@@ -36,13 +34,18 @@ public class Player : MonoBehaviour, IAttackable, IDamageable
     public void TakeDamage(float damage)
     {
 
-
         OnHealthPointsChanged?.Invoke(_healthPoints);
+
+        if(_healthPoints <= 0)
+        {
+            Die();
+        }
+
     }
 
     public void Die()
     {
-        throw new NotImplementedException();
+        GameEventManager.ReloadCurrentScene();
     }
 
     private void GetWeapon()

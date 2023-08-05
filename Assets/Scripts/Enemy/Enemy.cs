@@ -8,7 +8,6 @@ public abstract class Enemy : MonoBehaviour, IDamageable, IAttackable
     [SerializeField] protected float CurrentHealth;
 
     protected float Health;
-    protected Weapon Weapon;
 
     public abstract void TakeDamage(float damage);
     public abstract void Die();
