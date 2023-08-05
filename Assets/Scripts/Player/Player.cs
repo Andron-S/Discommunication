@@ -28,7 +28,7 @@ public class Player : MonoBehaviour, IAttackable, IDamageable
             return;
         }
 
-        Debug.Log("Активация способности кусать");
+        Debug.Log("пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ");
 
         _isAttackCooldowned = false;
         var attackDelayCorutine = StartCoroutine(CalculatingAttackDelay());
@@ -36,8 +36,8 @@ public class Player : MonoBehaviour, IAttackable, IDamageable
 
     public void Attack()
     {
-        Debug.Log("Атака оружием");
-        // вызвать метод атаки у класса Оружия
+        Debug.Log("пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ");
+        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
     }
 
     public IEnumerator CalculatingAttackDelay()

@@ -15,7 +15,7 @@ public class MeleeSwordEnemy : Enemy
 
     public override void Attack()
     {
-        // Вызов оружия
+        // пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
     }
 
     public override IEnumerator CalculatingAttackDelay()
@@ -27,7 +27,7 @@ public class MeleeSwordEnemy : Enemy
 
     public override void Die()
     {
-        // Вызов анимации смерти
+        // пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 
         Destroy(gameObject);
     }
