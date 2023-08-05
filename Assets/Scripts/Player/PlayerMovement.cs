@@ -9,10 +9,10 @@ public class PlayerMovement : PlayerControl
 {
     [SerializeField] private float _speed;
 
-    protected Rigidbody2D _rigidbody2D;
-    protected Transform _transform;
-    protected Vector2 _direction;
-    protected Vector2 _move;
+    private Rigidbody2D _rigidbody2D;
+    private Transform _transform;
+    private Vector2 _direction;
+    private Vector2 _move;
 
     public override void Awake()
     {
@@ -36,6 +36,8 @@ public class PlayerMovement : PlayerControl
         Move();
         Rotate();
     }
+
+    public float Speed { get => _speed; set => _speed = value; }
 
     private void GetDirection()
     {
