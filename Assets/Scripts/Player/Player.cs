@@ -7,17 +7,31 @@ using UnityEngine;
 public class Player : MonoBehaviour, IAttackable, IDamageable
 {
     [SerializeField] private float _healthPoints;
+    [SerializeField] private float _attackDelay;
+
+    private bool _isAttackCooldowned;
 
     public static event Action<float> OnHealthPointsChanged;
 
     private void Start()
     {
-        
+        _healthPoints = 50;
+        _attackDelay = 2;
+
+        _isAttackCooldowned = true;
     }
 
     public void EatAbility()
     {
+        if(_isAttackCooldowned == false)
+        {
+            return;
+        }
+
         Debug.Log("Активация способности кусать");
+
+        _isAttackCooldowned = false;
+        var attackDelayCorutine = StartCoroutine(CalculatingAttackDelay());
     }
 
     public void Attack()
@@ -27,8 +41,10 @@ public class Player : MonoBehaviour, IAttackable, IDamageable
     }
 
     public IEnumerator CalculatingAttackDelay()
-    {
-        throw new NotImplementedException();
+    { 
+        yield return new WaitForSeconds(_attackDelay);
+
+        _isAttackCooldowned = true;
     }
 
     public void TakeDamage(float damage)
