@@ -1,3 +1,4 @@
+using DG.Tweening.Core;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,12 +11,11 @@ public class MeleeSwordEnemy : Enemy
 
         Health = 100;
         Armor = 50;
-        Speed = 5;
     }
 
     public override void Attack()
     {
-        // Вызов оружия
+        // пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
     }
 
     public override IEnumerator CalculatingAttackDelay()
@@ -27,7 +27,7 @@ public class MeleeSwordEnemy : Enemy
 
     public override void Die()
     {
-        // Вызов анимации смерти
+        // пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 
         Destroy(gameObject);
     }
@@ -42,6 +42,8 @@ public class MeleeSwordEnemy : Enemy
         {
             Health -= damage;
         }
+
+        Debug.Log("Damage is gotten by " + gameObject.name);
 
         if(Health <=0)
         {

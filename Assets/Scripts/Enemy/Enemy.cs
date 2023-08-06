@@ -10,7 +10,6 @@ public abstract class Enemy : MonoBehaviour, IDamageable, IAttackable
     [SerializeField] protected float AttackDelay;
     [SerializeField] protected float Health;
     [SerializeField] protected float Armor;
-    [SerializeField] protected float Speed;
 
     protected bool _isAttackCooldowned;
 

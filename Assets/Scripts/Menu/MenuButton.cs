@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class MenuButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
@@ -13,6 +14,8 @@ public class MenuButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
     private RectTransform _rectTransform;
     private Color _startColor;
     private Vector3 _startScale;
+
+    [SerializeField] private int _nextSceneNumber = 1;
 
     private void Start()
     {
@@ -36,5 +39,15 @@ public class MenuButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         Sequence sequence = DOTween.Sequence()
             .Append(transform.DOScale(_startScale, 0.5f))
             .Join(_image.DOColor(_startColor, 0.2f));
+    }
+
+    public void LoadLevel()
+    {
+        SceneManager.LoadScene(_nextSceneNumber);
+    }
+
+    public void ExitGame()
+    {
+        Application.Quit();
     }
 }

@@ -1,15 +1,22 @@
-using Assets;
+п»їusing Assets;
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
+
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour, IAttackable, IDamageable
 {
     [SerializeField] private float _healthPoints;
     [SerializeField] private float _attackDelay;
+    [SerializeField] private Weapon _weapon;
+    [SerializeField] private Image _healthBar;
 
     private bool _isAttackCooldowned;
+    private float _maxHealth = 100;
 
     public static event Action<float> OnHealthPointsChanged;
 
@@ -23,12 +30,12 @@ public class Player : MonoBehaviour, IAttackable, IDamageable
 
     public void EatAbility()
     {
-        if(_isAttackCooldowned == false)
+        if (_isAttackCooldowned == false)
         {
             return;
         }
 
-        Debug.Log("Активация способности кусать");
+        Debug.Log("Player is attacking with ability");
 
         _isAttackCooldowned = false;
         var attackDelayCorutine = StartCoroutine(CalculatingAttackDelay());
@@ -36,12 +43,19 @@ public class Player : MonoBehaviour, IAttackable, IDamageable
 
     public void Attack()
     {
-        Debug.Log("Атака оружием");
-        // вызвать метод атаки у класса Оружия
+        Debug.Log("Player is attacking with weapon");
+
+        if (_weapon == null)
+        {
+            Debug.Log("Player has't Weapon");
+            return;
+        }
+
+        _weapon.Attack();
     }
 
     public IEnumerator CalculatingAttackDelay()
-    { 
+    {
         yield return new WaitForSeconds(_attackDelay);
 
         _isAttackCooldowned = true;
@@ -51,8 +65,8 @@ public class Player : MonoBehaviour, IAttackable, IDamageable
     {
 
         OnHealthPointsChanged?.Invoke(_healthPoints);
-
-        if(_healthPoints <= 0)
+        _healthBar.fillAmount = _healthPoints / _maxHealth;
+        if (_healthPoints <= 0)
         {
             Die();
         }
@@ -61,6 +75,7 @@ public class Player : MonoBehaviour, IAttackable, IDamageable
 
     public void Die()
     {
+        //TODO: РІС‹Р·РІР°С‚СЊ РјРµРЅСЋ
         GameEventManager.ReloadCurrentScene();
     }
 
