@@ -37,6 +37,5 @@ public class Bullet : MonoBehaviour
     private void Attack(IDamageable liver)
     {
         liver.TakeDamage(_damage);
-        Debug.Log("Damage is taken");
     }
 }

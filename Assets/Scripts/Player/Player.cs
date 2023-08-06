@@ -1,16 +1,22 @@
-using Assets;
+﻿using Assets;
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
+
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour, IAttackable, IDamageable
 {
     [SerializeField] private float _healthPoints;
     [SerializeField] private float _attackDelay;
     [SerializeField] private Weapon _weapon;
+    [SerializeField] private Image _healthBar;
 
     private bool _isAttackCooldowned;
+    private float _maxHealth = 100;
 
     public static event Action<float> OnHealthPointsChanged;
 
@@ -24,7 +30,7 @@ public class Player : MonoBehaviour, IAttackable, IDamageable
 
     public void EatAbility()
     {
-        if(_isAttackCooldowned == false)
+        if (_isAttackCooldowned == false)
         {
             return;
         }
@@ -49,7 +55,7 @@ public class Player : MonoBehaviour, IAttackable, IDamageable
     }
 
     public IEnumerator CalculatingAttackDelay()
-    { 
+    {
         yield return new WaitForSeconds(_attackDelay);
 
         _isAttackCooldowned = true;
@@ -59,8 +65,8 @@ public class Player : MonoBehaviour, IAttackable, IDamageable
     {
 
         OnHealthPointsChanged?.Invoke(_healthPoints);
-
-        if(_healthPoints <= 0)
+        _healthBar.fillAmount = _healthPoints / _maxHealth;
+        if (_healthPoints <= 0)
         {
             Die();
         }
@@ -69,6 +75,7 @@ public class Player : MonoBehaviour, IAttackable, IDamageable
 
     public void Die()
     {
+        //TODO: вызвать меню
         GameEventManager.ReloadCurrentScene();
     }
 
