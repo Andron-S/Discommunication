@@ -2110,6 +2110,10 @@ PrefabInstance:
       propertyPath: _isMeleeMode
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -5286809851940237257, guid: 8b101fa8824874f46824c60187525814, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: -466945118859860957, guid: 8b101fa8824874f46824c60187525814, type: 3}
       propertyPath: m_Enabled
       value: 1

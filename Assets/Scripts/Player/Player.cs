@@ -119,7 +119,7 @@ public class Player : MonoBehaviour, IAttackable, IDamageable
     {
         while (_healthPoints > 0)
         {
-            _healthPoints -= _reducingHealthPointsDamage;
+            TakeDamage(_reducingHealthPointsDamage);
             yield return new WaitForSeconds(_reducingHealthPointsDelay);
         }
 
