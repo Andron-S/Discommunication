@@ -11,11 +11,13 @@ using UnityEngine.InputSystem;
 public class PlayerMovement : PlayerControl
 {
     [SerializeField] private float _speed;
+    [SerializeField] private Camera _camera;
 
     private Rigidbody2D _rigidbody2D;
     private Transform _transform;
     private Vector2 _direction;
     private Vector2 _move;
+    private Vector2 _mousePosition;
 
     public static event Action<Vector2> OnRotated;
 
@@ -27,6 +29,7 @@ public class PlayerMovement : PlayerControl
         _transform = GetComponent<Transform>();
 
         Input.Player.Move.performed += movementContext => GetDirection();
+        Input.Player.MousePosition.performed += mousePositionConytext => OnMousePosition();
     }
 
     private void Start()
@@ -34,14 +37,15 @@ public class PlayerMovement : PlayerControl
         _speed = 7;
         _rigidbody2D.gravityScale = 0;
 
-        OnRotated?.Invoke(_move);
+        OnRotated?.Invoke(_mousePosition);
     }
 
     private void FixedUpdate()
     {
         GetDirection();
         Move();
-        Rotate();
+        FaceOnMousePointer();
+        //Rotate();
     }
 
     public float Speed { get => _speed; set => _speed = value; }
@@ -54,17 +58,23 @@ public class PlayerMovement : PlayerControl
     private void Move()
     {
         var newDirection = new Vector2(_direction.x, _direction.y);
-
-        if (_move != newDirection)
-        {
-            OnRotated?.Invoke(_move);
-        }
-
         _move = newDirection;
 
         float scaledMoveSpeed = _speed * Time.fixedDeltaTime;
 
         _rigidbody2D.MovePosition(_rigidbody2D.position + _move * scaledMoveSpeed);
+    }
+
+    private void FaceOnMousePointer()
+    {
+        Vector2 facindDirection = _mousePosition - _rigidbody2D.position;
+        float angle = Mathf.Atan2(-facindDirection.x, facindDirection.y) * Mathf.Rad2Deg;
+        _rigidbody2D.MoveRotation(angle);
+
+        if(_rigidbody2D.rotation != angle)
+        {
+            OnRotated?.Invoke(facindDirection.normalized);
+        }
     }
 
     private void Rotate()
@@ -78,6 +88,6 @@ public class PlayerMovement : PlayerControl
 
     private void OnMousePosition()
     {
-
+        _mousePosition = _camera.ScreenToWorldPoint(Input.Player.MousePosition.ReadValue<Vector2>());
     }
 }
