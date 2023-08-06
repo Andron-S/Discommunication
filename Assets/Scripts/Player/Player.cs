@@ -17,7 +17,7 @@ public class Player : MonoBehaviour, IAttackable, IDamageable
 
     private WeaponHand _weaponHand; 
 
-    private Weapon _personalMeleeWeapon;
+    //private Weapon _personalMeleeWeapon;
     private bool _isAttackCooldowned;
     private float _maxHealth = 100;
     private Coroutine reducingHealthPointsCorutine;
@@ -26,18 +26,18 @@ public class Player : MonoBehaviour, IAttackable, IDamageable
 
     private void Start()
     {
-        _healthPoints = 50;
-        _attackDelay = 2;
+        _maxHealth = _healthPoints;
+        //_attackDelay = 2;
 
         _isAttackCooldowned = true;
 
-        _reducingHealthPointsDelay = 1;
-        _reducingHealthPointsDamage = 1;
+        //_reducingHealthPointsDelay = 1;
+        //_reducingHealthPointsDamage = 1;
 
         reducingHealthPointsCorutine = StartCoroutine(ReducingHealthPoints());
 
-        _personalMeleeWeapon = GetComponentInChildren<Weapon>();
-        _personalMeleeWeapon.SetDurable(50000);
+        //_personalMeleeWeapon = GetComponentInChildren<Weapon>();
+        //_personalMeleeWeapon.SetDurable(50000);
 
         _weaponHand = GetComponentInChildren<WeaponHand>();
 
@@ -58,6 +58,7 @@ public class Player : MonoBehaviour, IAttackable, IDamageable
         _weapon.TryAttack();
     }
 
+    /*
     public void AttackMelee()
     {
         // Maybe Player need private personal Weapon with only Melee attack?
@@ -71,7 +72,7 @@ public class Player : MonoBehaviour, IAttackable, IDamageable
 
         Debug.Log("Player is attacking Melee");
 
-    }
+    }*/
 
     public IEnumerator CalculatingAttackDelay()
     {
@@ -87,7 +88,7 @@ public class Player : MonoBehaviour, IAttackable, IDamageable
         OnHealthPointsChanged?.Invoke(_healthPoints);
 
         // Need to link healthBar with Scene
-        //_healthBar.fillAmount = _healthPoints / _maxHealth;
+        _healthBar.fillAmount = _healthPoints / _maxHealth;
 
         if (_healthPoints <= 0)
         {

@@ -6,6 +6,8 @@ public class MeleeSwordEnemy : Enemy
 {
     private Weapon _weapon;
 
+    private bool _isOnCooldown = false;
+
     protected void Start()
     {
         base.Start();
@@ -58,7 +60,7 @@ public class MeleeSwordEnemy : Enemy
 
         if (collision.collider.TryGetComponent(out Player player))
         {
-            _weapon.Attack();
+            TryAttack();
         }
     }
 
@@ -66,8 +68,25 @@ public class MeleeSwordEnemy : Enemy
     {
         if (collision.collider.TryGetComponent(out Player player))
         {
-            _weapon.Attack();
+            TryAttack();
         }
+    }
+
+    private void TryAttack()
+    {
+        if (_isOnCooldown)
+            return;
+
+        _weapon.Attack();
+        StartCoroutine(Cooldown());
+    } 
+
+    IEnumerator Cooldown()
+    {
+        _isOnCooldown = true;
+
+        yield return new WaitForSeconds(AttackDelay);
+        _isOnCooldown = false;
     }
 
 }
