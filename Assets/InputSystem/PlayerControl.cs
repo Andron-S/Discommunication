@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerControl : MonoBehaviour
@@ -14,7 +12,7 @@ public class PlayerControl : MonoBehaviour
         Input = new PlayerInput();
         Input.Player.Enable();
 
-        Input.Player.Attack.performed += rangeContext => _player.Attack();
+        Input.Player.Attack.performed += rangeContext => _player.AttackWeapon();
         Input.Player.EatAbility.performed += eatContext => _player.EatAbility();
     }
 

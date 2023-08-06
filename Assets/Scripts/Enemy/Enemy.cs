@@ -1,7 +1,8 @@
 using Assets;
+
 using System;
 using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
 
 public abstract class Enemy : MonoBehaviour, IDamageable, IAttackable, IItemCollector
@@ -22,7 +23,7 @@ public abstract class Enemy : MonoBehaviour, IDamageable, IAttackable, IItemColl
 
     public abstract void TakeDamage(float damage);
     public abstract void Die();
-    public abstract void Attack();
+    public abstract void AttackWeapon();
     public abstract IEnumerator CalculatingAttackDelay();
 
     public bool TryCollectItem(ItemSO itemData)

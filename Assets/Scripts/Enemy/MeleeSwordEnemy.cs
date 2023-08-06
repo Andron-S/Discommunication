@@ -1,6 +1,5 @@
-using DG.Tweening.Core;
 using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
 
 public class MeleeSwordEnemy : Enemy
@@ -10,7 +9,7 @@ public class MeleeSwordEnemy : Enemy
         base.Start();
     }
 
-    public override void Attack()
+    public override void AttackWeapon()
     {
         // ����� ������
     }
