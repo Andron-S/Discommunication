@@ -75,4 +75,9 @@ public class PlayerMovement : PlayerControl
             _transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
         }
     }
+
+    private void OnMousePosition()
+    {
+
+    }
 }
