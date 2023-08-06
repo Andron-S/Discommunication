@@ -19,6 +19,11 @@ public class Item : MonoBehaviour
     [SerializeField] private UnityEvent _onNotCollected;
     [SerializeField] private bool _destroyOnCollect = true;
 
+    private void Awake()
+    {
+        StartCoroutine(DisableColliderFor(_colliderDisablTimeAfterDrop));
+    }
+
     private void Start()
     {
         if (_itemSO != null && !_itemIsLoaded)
