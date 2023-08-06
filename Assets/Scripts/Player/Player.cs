@@ -3,7 +3,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -21,6 +20,7 @@ public class Player : MonoBehaviour, IAttackable, IDamageable
     private bool _isAttackCooldowned;
     private float _maxHealth = 100;
     private Coroutine reducingHealthPointsCorutine;
+    private WeaponHand _weaponHand; 
 
     public static event Action<float> OnHealthPointsChanged;
 
@@ -35,6 +35,10 @@ public class Player : MonoBehaviour, IAttackable, IDamageable
         _reducingHealthPointsDamage = 1;
 
         reducingHealthPointsCorutine = StartCoroutine(ReducingHealthPoints());
+
+        _weaponHand = GetComponentInChildren<WeaponHand>();
+
+        CreateWeapon();
     }
 
     public void EatAbility()
@@ -101,8 +105,11 @@ public class Player : MonoBehaviour, IAttackable, IDamageable
         Destroy(weapon);
     }
 
-    private void GetWeapon(Weapon weapon)
+    public void GetWeapon(Weapon weapon)
     {
+        _weapon = weapon;
+        _weapon.transform.position = _weaponHand.transform.position;
+        _weapon.transform.SetParent(_weaponHand.transform);
         // Get Weapon from died Enemy
     }
 
@@ -117,4 +124,10 @@ public class Player : MonoBehaviour, IAttackable, IDamageable
         Die();
     }
 
+    private void CreateWeapon()
+    {
+        Weapon weapon = Instantiate(_weapon, _weaponHand.transform.position, Quaternion.identity, gameObject.transform);
+       // weapon.transform.right = _weaponHand.transform.up;
+        _weapon = weapon;
+    }
 }
