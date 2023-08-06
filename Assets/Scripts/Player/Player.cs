@@ -5,7 +5,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Player : MonoBehaviour, IAttackable, IDamageable
+public class Player : MonoBehaviour, IAttackable, IDamageable, IItemCollector
 {
     [SerializeField] private float _healthPoints;
     [SerializeField] private float _reducingHealthPointsDelay;
@@ -37,7 +37,7 @@ public class Player : MonoBehaviour, IAttackable, IDamageable
         reducingHealthPointsCorutine = StartCoroutine(ReducingHealthPoints());
 
         _personalMeleeWeapon = GetComponentInChildren<Weapon>();
-        _personalMeleeWeapon.SetDurable(50000);
+        //_personalMeleeWeapon.SetDurable(50000);
 
         _weaponHand = GetComponentInChildren<WeaponHand>();
 
@@ -139,5 +139,16 @@ public class Player : MonoBehaviour, IAttackable, IDamageable
         Weapon weapon = Instantiate(_weapon, _weaponHand.transform.position, transform.rotation, gameObject.transform);
        // weapon.transform.right = _weaponHand.transform.up;
         _weapon = weapon;
+    }
+
+    public bool TryCollectItem(ItemSO itemData)
+    {
+        itemData.OnCollected(this);
+        return true;
+    }
+
+    public GameObject GetCollectorObject()
+    {
+        return gameObject;
     }
 }
