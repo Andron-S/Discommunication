@@ -17,6 +17,7 @@ public class PlayerControl : MonoBehaviour
         Input.Player.Attack.performed += rangeContext => _player.AttackWeapon();
         Input.Player.EatAbility.performed += eatContext => _player.EatAbility();
         Input.Player.MeleeAttack.performed += meleeContext => _player.AttackMelee();
+        Input.Player.DropWeapon.performed += dropWeaponContext => _player.DropWeapon();
     }
 
     private void OnEnable()
