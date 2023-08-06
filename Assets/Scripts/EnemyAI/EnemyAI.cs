@@ -100,7 +100,7 @@ public class EnemyAI : MonoBehaviour
     {
         if(GetDistanceToPlayer(this) < _enemyAttackDistance)
         {
-            _controllingEnemy.Attack();
+            _controllingEnemy.AttackWeapon();
             return true;
         }
         else
