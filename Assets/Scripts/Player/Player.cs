@@ -8,6 +8,7 @@ public class Player : MonoBehaviour, IAttackable, IDamageable
 {
     [SerializeField] private float _healthPoints;
     [SerializeField] private float _attackDelay;
+    [SerializeField] private Weapon _weapon;
 
     private bool _isAttackCooldowned;
 
@@ -28,7 +29,7 @@ public class Player : MonoBehaviour, IAttackable, IDamageable
             return;
         }
 
-        Debug.Log("��������� ����������� ������");
+        Debug.Log("Player is attacking with ability");
 
         _isAttackCooldowned = false;
         var attackDelayCorutine = StartCoroutine(CalculatingAttackDelay());
@@ -36,8 +37,15 @@ public class Player : MonoBehaviour, IAttackable, IDamageable
 
     public void Attack()
     {
-        Debug.Log("����� �������");
-        // ������� ����� ����� � ������ ������
+        Debug.Log("Player is attacking with weapon");
+
+        if (_weapon == null)
+        {
+            Debug.Log("Player has't Weapon");
+            return;
+        }
+
+        _weapon.Attack();
     }
 
     public IEnumerator CalculatingAttackDelay()

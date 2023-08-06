@@ -1,3 +1,4 @@
+using DG.Tweening.Core;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,7 +11,6 @@ public class MeleeSwordEnemy : Enemy
 
         Health = 100;
         Armor = 50;
-        Speed = 5;
     }
 
     public override void Attack()
@@ -42,6 +42,8 @@ public class MeleeSwordEnemy : Enemy
         {
             Health -= damage;
         }
+
+        Debug.Log("Damage is gotten by " + gameObject.name);
 
         if(Health <=0)
         {

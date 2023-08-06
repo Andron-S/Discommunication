@@ -65,5 +65,6 @@ public class Weapon: MonoBehaviour
     private void DistantAttack()
     {
         Bullet createdBullet = Instantiate(_bulletTemplate, _bulletBeginer.transform.position, _bulletBeginer.transform.rotation);
+        //createdBullet.FlyLive();
     }
 }
