@@ -13,7 +13,7 @@ public class MeleeSwordEnemy : Enemy
         Armor = 50;
     }
 
-    public override void Attack()
+    public override void AttackWeapon()
     {
         // ����� ������
     }

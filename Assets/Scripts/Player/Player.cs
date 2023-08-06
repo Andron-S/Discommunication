@@ -41,7 +41,7 @@ public class Player : MonoBehaviour, IAttackable, IDamageable
         var attackDelayCorutine = StartCoroutine(CalculatingAttackDelay());
     }
 
-    public void Attack()
+    public void AttackWeapon()
     {
         Debug.Log("Player is attacking with weapon");
 
@@ -52,6 +52,14 @@ public class Player : MonoBehaviour, IAttackable, IDamageable
         }
 
         _weapon.Attack();
+    }
+
+    public void AttackMelee()
+    {
+        // Maybe Player need private personal Weapon with only Melee attack?
+
+        Debug.Log("Player is attacking Melee");
+
     }
 
     public IEnumerator CalculatingAttackDelay()
@@ -79,8 +87,8 @@ public class Player : MonoBehaviour, IAttackable, IDamageable
         GameEventManager.ReloadCurrentScene();
     }
 
-    private void GetWeapon()
+    private void GetWeapon(Weapon weapon)
     {
-
+        // Get Weapon from died Enemy
     }
 }
