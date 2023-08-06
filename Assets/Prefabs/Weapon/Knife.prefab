@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 7106396656166674428}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0.92387956, w: 0.38268343}
-  m_LocalPosition: {x: -3.37, y: 1.8, z: 0}
+  m_LocalPosition: {x: -3.9389997, y: 2.066, z: 0}
   m_LocalScale: {x: 0.19, y: 0.19, z: 0.19}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -100,9 +100,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _meleeDamage: 40
   _durable: 5
-  _meleeAttackRadius: 5
-  _bulletTemplate: {fileID: 2106735751767350643, guid: d1e5046b99cd54438ad6b157e62805d2, type: 3}
-  _isMeleeMode: 0
+  _bulletTemplate: {fileID: 11400000, guid: 2157847a8d7954a8db1d24f7c7b4a19b, type: 2}
+  _isMeleeMode: 1
 --- !u!1001 &5398252309450355168
 PrefabInstance:
   m_ObjectHideFlags: 0

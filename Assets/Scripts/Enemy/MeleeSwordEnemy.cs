@@ -1,12 +1,9 @@
-using DG.Tweening.Core;
 using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
 
 public class MeleeSwordEnemy : Enemy
 {
-    [SerializeField] private Weapon _weapon;
-
     protected void Start()
     {
         base.Start();
@@ -14,14 +11,7 @@ public class MeleeSwordEnemy : Enemy
 
     public override void AttackWeapon()
     {
-        // weapon duration of enemy has a limit? 
-        // Because now weapon has _durable = 5 and will destroy
-        if (_weapon == null)
-        {
-            return;
-        }
-
-        _weapon.Attack();
+        // ����� ������
     }
 
     public override IEnumerator CalculatingAttackDelay()
@@ -33,7 +23,7 @@ public class MeleeSwordEnemy : Enemy
 
     public override void Die()
     {
-        // Add animation of death
+        // ����� �������� ������
 
         Destroy(gameObject);
     }
