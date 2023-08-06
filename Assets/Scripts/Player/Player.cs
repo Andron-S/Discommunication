@@ -79,8 +79,19 @@ public class Player : MonoBehaviour, IAttackable, IDamageable
         GameEventManager.ReloadCurrentScene();
     }
 
-    private void GetWeapon()
+    private void GetWeapon(Weapon weapon)
     {
+        // Get Weapon from died Enemy
+    }
 
+    private IEnumerator ReducingHealthPoints()
+    {
+        while(_healthPoints > 0)
+        {
+            _healthPoints -= _reducingHealthPointsDamage;
+            yield return new WaitForSeconds(_reducingHealthPointsDelay);
+        }
+
+        Die();
     }
 }

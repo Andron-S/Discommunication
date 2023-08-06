@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5763709983398304672}
+  - component: {fileID: 7464374077935186241}
   m_Layer: 0
   m_Name: Eat
   m_TagString: Untagged
@@ -25,12 +26,28 @@ Transform:
   m_GameObject: {fileID: 1988977581017632018}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0.085, y: -0.07, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2905108002136843246}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7464374077935186241
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1988977581017632018}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 977df8dcb13faea459597808b9f4c799, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _damage: 0
+  _activatePoint: {fileID: 5763709983398304672}
+  _range: 0
+  _activateDelay: 0
 --- !u!1 &9048446911709480663
 GameObject:
   m_ObjectHideFlags: 0
@@ -191,7 +208,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!114 &91133343109459994
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -218,4 +235,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _healthPoints: 0
+  _reducingHealthPointsDelay: 0
+  _reducingHealthPointsDamage: 0
   _attackDelay: 0
+  _weapon: {fileID: 0}
+  _healthBar: {fileID: 0}
+  _eatAbility: {fileID: 0}
