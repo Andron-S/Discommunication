@@ -9,33 +9,30 @@ public class Bullet : MonoBehaviour
     [SerializeField] private float _speed = 50;
 
     private float _flyTime = 0;
+    private float _maxFlyTime;
 
     public void FlyLive()
     {
+        _maxFlyTime = 10;
         StartCoroutine(Fly());
-        Destroy(gameObject);
+    }
+
+    public void MeleeLive()
+    {
+        _speed = 0.3f;
+        _maxFlyTime = 0.3f;
+        StartCoroutine(Fly());
     }
 
     private IEnumerator Fly()
     {
-        while (Physics2D.RaycastAll(transform.position, transform.up).Length == 0 && _flyTime < 10)
+        while (_flyTime < _maxFlyTime)
         {
-            transform.position += new Vector3(0, _speed, 0);
+            transform.position += transform.up * _speed * Time.deltaTime * -1;
             _flyTime += Time.deltaTime;
             yield return null;
         }
 
-        if (Physics2D.RaycastAll(transform.position, transform.up).Length > 0)
-        {
-            if (Physics2D.RaycastAll(transform.position, transform.up)[0].collider.TryGetComponent<IDamageable>(out IDamageable liver))
-            {
-                Attack(liver);
-            }
-        }
-    }
-
-    private void Attack(IDamageable liver)
-    {
-        liver.TakeDamage(_damage);
+        Destroy(gameObject);
     }
 }

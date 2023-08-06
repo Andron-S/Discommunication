@@ -11,8 +11,8 @@ public class PlayerEffectableSO : EffectingItemSO<Player>
     protected override void _AddEffect(Player player)
     {
         Debug.Log($"{this}>>>effecting {player}");
-        //player.TakeDamage(-hpChange);
-        player.GetComponent<HPBarSimple>().UpdateHP(hpChange);
+        player.TakeDamage(-hpChange);
+        //player.GetComponent<HPBarSimple>().UpdateHP(hpChange);
         ///
         ///
         ///ну и прочее
@@ -24,8 +24,8 @@ public class PlayerEffectableSO : EffectingItemSO<Player>
     protected override void _RemoveEffect(Player player)
     {
         Debug.Log($"{this}>>>remove effect from {player}");
-        //player.TakeDamage(hpChange);
-        player.GetComponent<HPBarSimple>().UpdateHP(-hpChange);
+        player.TakeDamage(hpChange);
+        //player.GetComponent<HPBarSimple>().UpdateHP(-hpChange);
         ///
         ///
         ///ну и прочее

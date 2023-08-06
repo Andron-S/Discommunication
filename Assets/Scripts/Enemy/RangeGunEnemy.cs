@@ -1,15 +1,24 @@
-using DG.Tweening.Core;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MeleeSwordEnemy : Enemy
+public class RangeGunEnemy : Enemy
 {
     [SerializeField] private Weapon _weapon;
+    [SerializeField] private Transform _playerPosition;
+
 
     protected void Start()
     {
         base.Start();
+
+        Health = 40;
+        Armor = 10;
+    }
+
+    private void Update()
+    {
+        
     }
 
     public override void AttackWeapon()
@@ -21,6 +30,7 @@ public class MeleeSwordEnemy : Enemy
             return;
         }
 
+        // this weapon should only distant attack?
         _weapon.Attack();
     }
 
@@ -40,7 +50,7 @@ public class MeleeSwordEnemy : Enemy
 
     public override void TakeDamage(float damage)
     {
-        if(Armor > 0)
+        if (Armor > 0)
         {
             Armor -= damage;
         }
@@ -51,9 +61,14 @@ public class MeleeSwordEnemy : Enemy
 
         Debug.Log("Damage is gotten by " + gameObject.name);
 
-        if(Health <=0)
+        if (Health <= 0)
         {
             Die();
         }
+    }
+
+    private void KeepDistanceFromPlayer()
+    {
+
     }
 }

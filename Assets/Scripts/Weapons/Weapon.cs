@@ -5,20 +5,23 @@ using UnityEngine;
 using UnityEngine.UIElements;
 
 [RequireComponent(typeof(SpriteRenderer))]
-public class Weapon: MonoBehaviour
+public class Weapon : MonoBehaviour
 {
-    [SerializeField] private float _meleeDamage = 40;
+    [SerializeField] private float _meleeDamage = 4;
     [SerializeField] private float _durable = 5;
     //[SerializeField] private float _beginRotation;
-    [SerializeField] private float _meleeAttackRadius = 5; // Если делать ближний удар по радиусу, то в 2-3 раза больше размера оружия
-    [SerializeField] private Bullet _bulletTemplate;
+    [SerializeField] private DamagableItemSO _bulletTemplate;
     [SerializeField] private bool _isMeleeMode = false;
 
     private BulletBeginer _bulletBeginer;
+    private SpriteRenderer _spriteRenderer;
+    private Color _color;
 
     public void Start()
     {
         _bulletBeginer = GetComponentInChildren<BulletBeginer>();
+        _spriteRenderer = GetComponent<SpriteRenderer>();
+        _color = _spriteRenderer.color;
     }
 
     public void Attack()
@@ -43,28 +46,29 @@ public class Weapon: MonoBehaviour
         }
     }
 
-    private bool TryGetMeleeAttackedTargets(out List<IDamageable> targets)
-    {
-        // Логика ближнего боя
-
-        targets = null;
-        return false;
-    }
-
     private void MeleeAttack()
     {
-        if (TryGetMeleeAttackedTargets(out List<IDamageable> targets))
-        {
-            foreach (IDamageable liver in targets)
-            {
-                liver.TakeDamage(_meleeDamage);
-            }
-        }
+        var createdBullet = _bulletTemplate.SpawnItemObjectAt(_bulletBeginer.transform.position);
+        createdBullet.transform.up = _bulletBeginer.transform.right;
+        _spriteRenderer.color = new Color(_color.r, _color.g, _color.b, 0);
+        StartCoroutine(BulletLive(createdBullet));
+        createdBullet.GetComponent<Bullet>().MeleeLive();
     }
 
     private void DistantAttack()
     {
-        Bullet createdBullet = Instantiate(_bulletTemplate, _bulletBeginer.transform.position, _bulletBeginer.transform.rotation);
-        //createdBullet.FlyLive();
+        var createdBullet = _bulletTemplate.SpawnItemObjectAt(_bulletBeginer.transform.position);
+        createdBullet.transform.up = _bulletBeginer.transform.up;
+        createdBullet.GetComponent<Bullet>().FlyLive();
+    }
+
+    private IEnumerator BulletLive(Item item)
+    {
+        while (item != null)
+        {
+            yield return null;
+        }
+
+        _spriteRenderer.color = _color;
     }
 }
