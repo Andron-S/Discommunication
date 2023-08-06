@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerItemContainer : ItemContainer, IItemCollector
 {
-
+    
     public void DropFirstItem()
     {
         var itemSO = _itemInventory.RemoveItem(0);
