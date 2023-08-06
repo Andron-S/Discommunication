@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 754222412818661548}
   - component: {fileID: 6034256312421175977}
   - component: {fileID: 544416659987840236}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TestEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -100,11 +100,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b8a7695d3f91864ba2dfd60f6b095e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CurrentHealth: 0
-  AttackDelay: 0
-  Health: 0
-  Armor: 0
-  Speed: 0
+  CurrentHealth: 100
+  AttackDelay: 1
+  Health: 100
+  Armor: 2
+  _weapon: {fileID: 0}
 --- !u!114 &754222412818661548
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -118,7 +118,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Target: {fileID: 0}
-  Speed: 0
+  Speed: 0.2
 --- !u!50 &6034256312421175977
 Rigidbody2D:
   serializedVersion: 4
