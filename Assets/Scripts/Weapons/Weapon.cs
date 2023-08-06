@@ -8,7 +8,7 @@ public class Weapon : MonoBehaviour
     //[SerializeField] private float _meleeDamage = 4;
     [SerializeField] private float _durable = 5;
     //[SerializeField] private float _beginRotation;
-    [SerializeField] private DamagableItemSO _bulletTemplate;
+    [SerializeField] private ItemSO _bulletTemplate;
     [SerializeField] private bool _isMeleeMode = false;
 
     private BulletBeginer _bulletBeginer;
