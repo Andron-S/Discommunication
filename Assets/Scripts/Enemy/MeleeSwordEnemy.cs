@@ -4,9 +4,14 @@ using UnityEngine;
 
 public class MeleeSwordEnemy : Enemy
 {
+    private Weapon _weapon;
+
     protected void Start()
     {
         base.Start();
+
+        _weapon = GetComponentInChildren<Weapon>();
+        _weapon.SetDurable(1000);
     }
 
     public override void AttackWeapon()
@@ -46,4 +51,23 @@ public class MeleeSwordEnemy : Enemy
             Die();
         }
     }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        Debug.Log("Attack");
+
+        if (collision.collider.TryGetComponent(out Player player))
+        {
+            _weapon.Attack();
+        }
+    }
+
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        if (collision.collider.TryGetComponent(out Player player))
+        {
+            _weapon.Attack();
+        }
+    }
+
 }
