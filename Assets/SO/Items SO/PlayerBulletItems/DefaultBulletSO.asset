@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de02b0422369f463ebbdabd0ea72a965, type: 3}
   m_Name: DefaultBulletSO
   m_EditorClassIdentifier: 
-  _itemID: 
+  _itemID: defaultBullet
   _itemSpriteSettings:
-    sprite: {fileID: 0}
-    spriteScale: {x: 1, y: 1}
-  _clearItemBase: {fileID: 0}
-  _itemType: 0
-  _damage: 0
+    sprite: {fileID: 21300000, guid: 8668fbdeaca7f4ab7ba832303810bf54, type: 3}
+    spriteScale: {x: 0.04, y: 0.04}
+  _clearItemBase: {fileID: 5578385567996847730, guid: 05f6027d56e75417e8b13f4e72d12d2a, type: 3}
+  _itemType: 1
+  _damage: 4
