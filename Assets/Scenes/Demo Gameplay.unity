@@ -399,6 +399,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1161103637}
     - target: {fileID: 443031327715323520, guid: 600606a0063ebab4b88b05a1ac75c217, type: 3}
+      propertyPath: _eatAbility
+      value: 
+      objectReference: {fileID: 2738595594449415343}
+    - target: {fileID: 443031327715323520, guid: 600606a0063ebab4b88b05a1ac75c217, type: 3}
       propertyPath: _attackDelay
       value: 1
       objectReference: {fileID: 0}
@@ -458,6 +462,17 @@ PrefabInstance:
       addedObject: {fileID: 1161103639}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 600606a0063ebab4b88b05a1ac75c217, type: 3}
+--- !u!114 &2738595594449415343 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7464374077935186241, guid: 600606a0063ebab4b88b05a1ac75c217, type: 3}
+  m_PrefabInstance: {fileID: 2738595594449415342}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 977df8dcb13faea459597808b9f4c799, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &5525858120700496895
 PrefabInstance:
   m_ObjectHideFlags: 0
