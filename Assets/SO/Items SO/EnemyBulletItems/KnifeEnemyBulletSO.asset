@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a80537a641cf474db9028db6818e91b, type: 3}
+  m_Name: KnifeEnemyBulletSO
+  m_EditorClassIdentifier: 
+  _itemID: knifeEnemyBullet
+  _itemSpriteSettings:
+    sprite: {fileID: 21300000, guid: 16875320bf83841168923eeb9841e0af, type: 3}
+    spriteScale: {x: 1, y: 1}
+  _clearItemBase: {fileID: 8835022084097647557, guid: 2b502a61c6b474eea9f28da761fa9d48, type: 3}
+  _itemType: 1
+  _damage: 7

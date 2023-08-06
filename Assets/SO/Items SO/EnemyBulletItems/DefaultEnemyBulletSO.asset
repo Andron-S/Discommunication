@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a80537a641cf474db9028db6818e91b, type: 3}
+  m_Name: DefaultEnemyBulletSO
+  m_EditorClassIdentifier: 
+  _itemID: defaultEnemyBullet
+  _itemSpriteSettings:
+    sprite: {fileID: 21300000, guid: 8668fbdeaca7f4ab7ba832303810bf54, type: 3}
+    spriteScale: {x: 1, y: 1}
+  _clearItemBase: {fileID: 8918665603580123266, guid: 449a97f68541a48f4a906eaab383262d, type: 3}
+  _itemType: 1
+  _damage: 4
