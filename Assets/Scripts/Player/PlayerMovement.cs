@@ -18,6 +18,8 @@ public class PlayerMovement : PlayerControl
     private Vector2 _direction;
     private Vector2 _move;
     private Vector2 _mousePosition;
+    private float _rotationThreshold;
+
 
     public static event Action<Vector2> OnRotated;
 
@@ -36,6 +38,7 @@ public class PlayerMovement : PlayerControl
     {
         _speed = 7;
         _rigidbody2D.gravityScale = 0;
+        _rotationThreshold = 0.1f;
 
         OnRotated?.Invoke(_mousePosition);
     }
@@ -45,7 +48,7 @@ public class PlayerMovement : PlayerControl
         GetDirection();
         Move();
         FaceOnMousePointer();
-        //Rotate();
+        Rotate();
     }
 
     public float Speed { get => _speed; set => _speed = value; }
@@ -67,13 +70,17 @@ public class PlayerMovement : PlayerControl
 
     private void FaceOnMousePointer()
     {
-        Vector2 facindDirection = _mousePosition - _rigidbody2D.position;
-        float angle = Mathf.Atan2(-facindDirection.x, facindDirection.y) * Mathf.Rad2Deg;
-        _rigidbody2D.MoveRotation(angle);
+        Vector2 facingDirection = _mousePosition - _rigidbody2D.position;
+        float angle = Mathf.Atan2(-facingDirection.x, facingDirection.y) * Mathf.Rad2Deg;
 
-        if(_rigidbody2D.rotation != angle)
+        Quaternion targetRotation = Quaternion.Euler(0, 0, angle);
+        var quat = Quaternion.AngleAxis(_rigidbody2D.rotation, Vector3.forward);
+
+        _rigidbody2D.MoveRotation(Quaternion.Slerp(quat, targetRotation, Time.deltaTime * 10));
+
+        if (Quaternion.Angle(quat, targetRotation) < _rotationThreshold)
         {
-            OnRotated?.Invoke(facindDirection.normalized);
+            OnRotated?.Invoke(facingDirection.normalized);
         }
     }
 
