@@ -10,9 +10,8 @@ public class EatAbility : MonoBehaviour
     [SerializeField] private float _damage;
     [SerializeField] private Transform _activatePoint;
     [SerializeField] private float _range;
-    [SerializeField] private float _activateDelay;
+    [SerializeField] private float _delay;
 
-    private float _delayCounter;
     private bool _isActivateRecharged;
     private Vector2 _currentPlayerDirection;
     private LayerMask _ignoredLayer;
@@ -26,18 +25,12 @@ public class EatAbility : MonoBehaviour
         _activatePoint.position = transform.position;
         _damage = 500;
         _range = 2f;
-        _activateDelay = 4;
+        _delay = 1.5f;
         _isActivateRecharged = true;
 
         PlayerMovement.OnRotated += GetPlayerDirection;
 
         _ignoredLayer = gameObject.transform.parent.gameObject.layer;
-    }
-
-    private void Update()
-    {
-        Debug.DrawRay(_activatePoint.position, _currentPlayerDirection * _range);
-        Debug.Log(_currentPlayerDirection);
     }
 
     public int TryEat()
@@ -47,6 +40,7 @@ public class EatAbility : MonoBehaviour
             return 0;
         }
 
+        Debug.Log("c1ir");
         RaycastHit2D[] hittedArray = Physics2D.RaycastAll(_activatePoint.position, _currentPlayerDirection * _range);
 
         foreach (var hitted in hittedArray)
@@ -56,23 +50,23 @@ public class EatAbility : MonoBehaviour
                 if (hitted.collider.TryGetComponent(out IDamageable damageable))
                 {
                     damageable.TakeDamage(Damage);
-                    Debug.Log("Eat ability hited on Enemy");
-
-                    var attackDelayCorutine = StartCoroutine(CalculatingAttackDelay());
-
                     return (int)Damage;
                 }
             }
         }
+
+        _isActivateRecharged = false;
+        StartCoroutine(CalculatingAttackDelay());
 
         return 0;
     }
 
     public IEnumerator CalculatingAttackDelay()
     {
-        RaiseDelayAbilityCounter();
-        yield return new WaitForSeconds(_activateDelay);
+        //RaiseDelayAbilityCounter();
+        yield return new WaitForSeconds(_delay);
 
+        Debug.Log("cir");
         _isActivateRecharged = true;
     }
 
@@ -81,9 +75,9 @@ public class EatAbility : MonoBehaviour
         _currentPlayerDirection = playerDirection;
     }
 
-    private void RaiseDelayAbilityCounter()
-    {
-        _delayCounter -= Time.deltaTime; // to Reloading Viewer in UI
-        OnDelayCounterChanged?.Invoke(_delayCounter);
-    }
+    //private void RaiseDelayAbilityCounter()
+    //{
+    //    _delayCounter -= Time.deltaTime; // to Reloading Viewer in UI
+    //    OnDelayCounterChanged?.Invoke(_delayCounter);
+    //}
 }
