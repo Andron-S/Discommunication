@@ -11,7 +11,7 @@ public class Player : MonoBehaviour, IAttackable, IDamageable
     [SerializeField] private float _reducingHealthPointsDelay;
     [SerializeField] private float _reducingHealthPointsDamage;
     [SerializeField] private float _attackDelay;
-    [SerializeField] private Weapon _weapon;
+    [SerializeField] private WeaponContainer _weapon;
     [SerializeField] private Image _healthBar;
     [SerializeField] private EatAbility _eatAbility;
 
@@ -41,7 +41,6 @@ public class Player : MonoBehaviour, IAttackable, IDamageable
 
         _weaponHand = GetComponentInChildren<WeaponHand>();
 
-        CreateWeapon();
     }
 
     public void EatAbility()
@@ -56,7 +55,7 @@ public class Player : MonoBehaviour, IAttackable, IDamageable
             return;
         }
 
-        _weapon.Attack();
+        _weapon.TryAttack();
     }
 
     public void AttackMelee()
@@ -115,14 +114,6 @@ public class Player : MonoBehaviour, IAttackable, IDamageable
         Destroy(weapon);
     }
 
-    public void GetWeapon(Weapon weapon)
-    {
-        _weapon = weapon;
-        _weapon.transform.position = _weaponHand.transform.position;
-        _weapon.transform.SetParent(_weaponHand.transform);
-        // Get Weapon from died Enemy
-    }
-
     private IEnumerator ReducingHealthPoints()
     {
         while (_healthPoints > 0)
@@ -132,12 +123,5 @@ public class Player : MonoBehaviour, IAttackable, IDamageable
         }
 
         Die();
-    }
-
-    private void CreateWeapon()
-    {
-        Weapon weapon = Instantiate(_weapon, _weaponHand.transform.position, transform.rotation, gameObject.transform);
-       // weapon.transform.right = _weaponHand.transform.up;
-        _weapon = weapon;
     }
 }

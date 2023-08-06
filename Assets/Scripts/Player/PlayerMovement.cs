@@ -47,7 +47,7 @@ public class PlayerMovement : PlayerControl
     {
         GetDirection();
         Move();
-        FaceOnMousePointer();
+        //FaceOnMousePointer();
         Rotate();
     }
 
@@ -70,17 +70,13 @@ public class PlayerMovement : PlayerControl
 
     private void FaceOnMousePointer()
     {
-        Vector2 facingDirection = _mousePosition - _rigidbody2D.position;
-        float angle = Mathf.Atan2(-facingDirection.x, facingDirection.y) * Mathf.Rad2Deg;
+        Vector2 facindDirection = _mousePosition - _rigidbody2D.position;
+        float angle = Mathf.Atan2(-facindDirection.x, facindDirection.y) * Mathf.Rad2Deg;
+        _rigidbody2D.MoveRotation(angle);
 
-        Quaternion targetRotation = Quaternion.Euler(0, 0, angle);
-        var quat = Quaternion.AngleAxis(_rigidbody2D.rotation, Vector3.forward);
-
-        _rigidbody2D.MoveRotation(Quaternion.Slerp(quat, targetRotation, Time.deltaTime * 10));
-
-        if (Quaternion.Angle(quat, targetRotation) < _rotationThreshold)
+        if (_rigidbody2D.rotation != angle)
         {
-            OnRotated?.Invoke(facingDirection.normalized);
+            OnRotated?.Invoke(facindDirection.normalized);
         }
     }
 
