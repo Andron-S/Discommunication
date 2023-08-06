@@ -73,7 +73,7 @@ public class PlayerMovement : PlayerControl
 
         if(_rigidbody2D.rotation != angle)
         {
-            OnRotated?.Invoke(facindDirection);
+            OnRotated?.Invoke(facindDirection.normalized);
         }
     }
 
