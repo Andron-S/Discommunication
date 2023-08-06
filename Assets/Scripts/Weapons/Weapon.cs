@@ -5,7 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(SpriteRenderer))]
 public class Weapon : MonoBehaviour
 {
-    [SerializeField] private float _meleeDamage = 4;
+    //[SerializeField] private float _meleeDamage = 4;
     [SerializeField] private float _durable = 5;
     //[SerializeField] private float _beginRotation;
     [SerializeField] private DamagableItemSO _bulletTemplate;
@@ -20,6 +20,11 @@ public class Weapon : MonoBehaviour
         _bulletBeginer = GetComponentInChildren<BulletBeginer>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _color = _spriteRenderer.color;
+    }
+
+    public void SetDurable(float durable)
+    {
+        _durable = durable;
     }
 
     public void Attack()

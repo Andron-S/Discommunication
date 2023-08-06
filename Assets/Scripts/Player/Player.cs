@@ -15,10 +15,12 @@ public class Player : MonoBehaviour, IAttackable, IDamageable
     [SerializeField] private Image _healthBar;
     [SerializeField] private EatAbility _eatAbility;
 
+    private WeaponHand _weaponHand; 
+
+    private Weapon _personalMeleeWeapon;
     private bool _isAttackCooldowned;
     private float _maxHealth = 100;
     private Coroutine reducingHealthPointsCorutine;
-    private WeaponHand _weaponHand; 
 
     public static event Action<float> OnHealthPointsChanged;
 
@@ -33,6 +35,9 @@ public class Player : MonoBehaviour, IAttackable, IDamageable
         _reducingHealthPointsDamage = 1;
 
         reducingHealthPointsCorutine = StartCoroutine(ReducingHealthPoints());
+
+        _personalMeleeWeapon = GetComponentInChildren<Weapon>();
+        _personalMeleeWeapon.SetDurable(50000);
 
         _weaponHand = GetComponentInChildren<WeaponHand>();
 
@@ -57,6 +62,13 @@ public class Player : MonoBehaviour, IAttackable, IDamageable
     public void AttackMelee()
     {
         // Maybe Player need private personal Weapon with only Melee attack?
+
+        if (_personalMeleeWeapon == null)
+        {
+            return;
+        }
+
+        _personalMeleeWeapon.Attack();
 
         Debug.Log("Player is attacking Melee");
 
@@ -124,7 +136,7 @@ public class Player : MonoBehaviour, IAttackable, IDamageable
 
     private void CreateWeapon()
     {
-        Weapon weapon = Instantiate(_weapon, _weaponHand.transform.position, Quaternion.identity, gameObject.transform);
+        Weapon weapon = Instantiate(_weapon, _weaponHand.transform.position, transform.rotation, gameObject.transform);
        // weapon.transform.right = _weaponHand.transform.up;
         _weapon = weapon;
     }
