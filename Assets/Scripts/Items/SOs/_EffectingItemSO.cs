@@ -28,6 +28,7 @@ public abstract class EffectingItemSO<EffectingComponent> : ItemSO where Effecti
     }
 
 
+
     protected abstract void _AddEffect(EffectingComponent component);
     protected abstract void _RemoveEffect(EffectingComponent component);
 }
