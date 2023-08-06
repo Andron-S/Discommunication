@@ -11,7 +11,7 @@ public class MeleeSwordEnemy : Enemy
         base.Start();
 
         _weapon = GetComponentInChildren<Weapon>();
-        _weapon.SetDurable(1000);
+       // _weapon.SetDurable(1000);
     }
 
     public override void AttackWeapon()
