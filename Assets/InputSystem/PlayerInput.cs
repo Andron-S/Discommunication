@@ -37,18 +37,18 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
-                    ""name"": ""Range"",
+                    ""name"": ""Attack"",
                     ""type"": ""Button"",
-                    ""id"": ""ecb25267-d1c5-43f5-86bc-268c79b914ca"",
+                    ""id"": ""000a56bb-7ef1-4026-99ef-39a2ae99746b"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Melee"",
+                    ""name"": ""EatAbility"",
                     ""type"": ""Button"",
-                    ""id"": ""000a56bb-7ef1-4026-99ef-39a2ae99746b"",
+                    ""id"": ""603a1e16-4a71-4085-99f1-abb330722805"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -56,17 +56,6 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                 }
             ],
             ""bindings"": [
-                {
-                    ""name"": """",
-                    ""id"": ""bfc19a87-8ed6-4efb-a0b9-f01e80858f65"",
-                    ""path"": ""<Mouse>/leftButton"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard and Mouse"",
-                    ""action"": ""Range"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
                 {
                     ""name"": ""2D Vector"",
                     ""id"": ""c996eecb-eef4-4426-b2e1-0c85eb802ecb"",
@@ -125,11 +114,22 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""72e7cde0-7c10-40fe-9ff1-2e7d6ddab0be"",
-                    ""path"": ""<Mouse>/rightButton"",
+                    ""path"": ""<Mouse>/leftButton"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard and Mouse"",
-                    ""action"": ""Melee"",
+                    ""action"": ""Attack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""bfe3212f-8c3c-44de-931d-b486c166f3bd"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""EatAbility"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -158,8 +158,8 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         // Player
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
-        m_Player_Range = m_Player.FindAction("Range", throwIfNotFound: true);
-        m_Player_Melee = m_Player.FindAction("Melee", throwIfNotFound: true);
+        m_Player_Attack = m_Player.FindAction("Attack", throwIfNotFound: true);
+        m_Player_EatAbility = m_Player.FindAction("EatAbility", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -222,15 +222,15 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Player;
     private List<IPlayerActions> m_PlayerActionsCallbackInterfaces = new List<IPlayerActions>();
     private readonly InputAction m_Player_Move;
-    private readonly InputAction m_Player_Range;
-    private readonly InputAction m_Player_Melee;
+    private readonly InputAction m_Player_Attack;
+    private readonly InputAction m_Player_EatAbility;
     public struct PlayerActions
     {
         private @PlayerInput m_Wrapper;
         public PlayerActions(@PlayerInput wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_Player_Move;
-        public InputAction @Range => m_Wrapper.m_Player_Range;
-        public InputAction @Melee => m_Wrapper.m_Player_Melee;
+        public InputAction @Attack => m_Wrapper.m_Player_Attack;
+        public InputAction @EatAbility => m_Wrapper.m_Player_EatAbility;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -243,12 +243,12 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Move.started += instance.OnMove;
             @Move.performed += instance.OnMove;
             @Move.canceled += instance.OnMove;
-            @Range.started += instance.OnRange;
-            @Range.performed += instance.OnRange;
-            @Range.canceled += instance.OnRange;
-            @Melee.started += instance.OnMelee;
-            @Melee.performed += instance.OnMelee;
-            @Melee.canceled += instance.OnMelee;
+            @Attack.started += instance.OnAttack;
+            @Attack.performed += instance.OnAttack;
+            @Attack.canceled += instance.OnAttack;
+            @EatAbility.started += instance.OnEatAbility;
+            @EatAbility.performed += instance.OnEatAbility;
+            @EatAbility.canceled += instance.OnEatAbility;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -256,12 +256,12 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Move.started -= instance.OnMove;
             @Move.performed -= instance.OnMove;
             @Move.canceled -= instance.OnMove;
-            @Range.started -= instance.OnRange;
-            @Range.performed -= instance.OnRange;
-            @Range.canceled -= instance.OnRange;
-            @Melee.started -= instance.OnMelee;
-            @Melee.performed -= instance.OnMelee;
-            @Melee.canceled -= instance.OnMelee;
+            @Attack.started -= instance.OnAttack;
+            @Attack.performed -= instance.OnAttack;
+            @Attack.canceled -= instance.OnAttack;
+            @EatAbility.started -= instance.OnEatAbility;
+            @EatAbility.performed -= instance.OnEatAbility;
+            @EatAbility.canceled -= instance.OnEatAbility;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -291,7 +291,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     public interface IPlayerActions
     {
         void OnMove(InputAction.CallbackContext context);
-        void OnRange(InputAction.CallbackContext context);
-        void OnMelee(InputAction.CallbackContext context);
+        void OnAttack(InputAction.CallbackContext context);
+        void OnEatAbility(InputAction.CallbackContext context);
     }
 }

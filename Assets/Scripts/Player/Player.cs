@@ -1,48 +1,82 @@
-using Assets;
+Ôªøusing Assets;
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
+
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour, IAttackable, IDamageable
 {
     [SerializeField] private float _healthPoints;
+    [SerializeField] private float _attackDelay;
+    [SerializeField] private Weapon _weapon;
+    [SerializeField] private Image _healthBar;
+
+    private bool _isAttackCooldowned;
+    private float _maxHealth = 100;
 
     public static event Action<float> OnHealthPointsChanged;
 
-    private PlayerMovement _playerMovement;
-    private Weapon _weapon;
-
     private void Start()
     {
-        _playerMovement = GetComponent<PlayerMovement>();
+        _healthPoints = 50;
+        _attackDelay = 2;
+
+        _isAttackCooldowned = true;
     }
 
     public void EatAbility()
     {
-        // Ì‡ÔËÒ‡Ú¸ ÎÓ„ËÍÛ
+        if (_isAttackCooldowned == false)
+        {
+            return;
+        }
+
+        Debug.Log("Player is attacking with ability");
+
+        _isAttackCooldowned = false;
+        var attackDelayCorutine = StartCoroutine(CalculatingAttackDelay());
     }
 
     public void Attack()
     {
+        Debug.Log("Player is attacking with weapon");
+
+        if (_weapon == null)
+        {
+            Debug.Log("Player has't Weapon");
+            return;
+        }
+
         _weapon.Attack();
     }
 
     public IEnumerator CalculatingAttackDelay()
     {
-        throw new NotImplementedException();
+        yield return new WaitForSeconds(_attackDelay);
+
+        _isAttackCooldowned = true;
     }
 
     public void TakeDamage(float damage)
     {
 
-
         OnHealthPointsChanged?.Invoke(_healthPoints);
+        _healthBar.fillAmount = _healthPoints / _maxHealth;
+        if (_healthPoints <= 0)
+        {
+            Die();
+        }
+
     }
 
     public void Die()
     {
-        throw new NotImplementedException();
+        //TODO: –≤—ã–∑–≤–∞—Ç—å –º–µ–Ω—é
+        GameEventManager.ReloadCurrentScene();
     }
 
     private void GetWeapon()
