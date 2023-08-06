@@ -11,7 +11,7 @@ public class Weapon: MonoBehaviour
     [SerializeField] private float _durable = 5;
     //[SerializeField] private float _beginRotation;
     [SerializeField] private float _meleeAttackRadius = 5; // Если делать ближний удар по радиусу, то в 2-3 раза больше размера оружия
-    [SerializeField] private Bullet _bulletTemplate;
+    [SerializeField] private GameObject _bulletTemplate;
     [SerializeField] private bool _isMeleeMode = false;
 
     private BulletBeginer _bulletBeginer;
@@ -64,7 +64,9 @@ public class Weapon: MonoBehaviour
 
     private void DistantAttack()
     {
-        Bullet createdBullet = Instantiate(_bulletTemplate, _bulletBeginer.transform.position, _bulletBeginer.transform.rotation);
-        //createdBullet.FlyLive();
+        Debug.Log("Created");
+        var createdBullet = Instantiate(_bulletTemplate, _bulletBeginer.transform.position, _bulletBeginer.transform.rotation);
+        Debug.Log(createdBullet);
+        createdBullet.GetComponent<Bullet>().FlyLive();
     }
 }
