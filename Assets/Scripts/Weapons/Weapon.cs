@@ -1,8 +1,6 @@
 using System.Collections;
-using System.Collections.Generic;
-using Assets;
+
 using UnityEngine;
-using UnityEngine.UIElements;
 
 [RequireComponent(typeof(SpriteRenderer))]
 public class Weapon : MonoBehaviour

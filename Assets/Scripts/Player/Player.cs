@@ -2,10 +2,8 @@
 
 using System;
 using System.Collections;
-using System.Collections.Generic;
 
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class Player : MonoBehaviour, IAttackable, IDamageable
@@ -92,7 +90,7 @@ public class Player : MonoBehaviour, IAttackable, IDamageable
 
     public void DropWeapon()
     {
-        if(_weapon == null)
+        if (_weapon == null)
         {
             return;
         }
@@ -108,7 +106,7 @@ public class Player : MonoBehaviour, IAttackable, IDamageable
 
     private IEnumerator ReducingHealthPoints()
     {
-        while(_healthPoints > 0)
+        while (_healthPoints > 0)
         {
             _healthPoints -= _reducingHealthPointsDamage;
             yield return new WaitForSeconds(_reducingHealthPointsDelay);
@@ -116,5 +114,4 @@ public class Player : MonoBehaviour, IAttackable, IDamageable
 
         Die();
     }
-
 }
