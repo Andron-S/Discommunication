@@ -25,7 +25,7 @@ public class EatAbility : MonoBehaviour
     {
         _activatePoint.position = transform.position;
         _damage = 500;
-        _range = 1.5f;
+        _range = 2f;
         _activateDelay = 4;
         _isActivateRecharged = true;
     }
@@ -44,7 +44,6 @@ public class EatAbility : MonoBehaviour
         }
 
         RaycastHit2D[] hittedArray = Physics2D.RaycastAll(_activatePoint.position, _activatePoint.right);
-        Debug.DrawRay(_activatePoint.position, transform.right * 100, Color.red);
 
         foreach (var hitted in hittedArray)
         {
@@ -54,12 +53,13 @@ public class EatAbility : MonoBehaviour
                 {
                     damageable.TakeDamage(Damage);
                     Debug.Log("Eat ability hited on Enemy");
+
+                    var attackDelayCorutine = StartCoroutine(CalculatingAttackDelay());
+
                     return (int)Damage; // how get 
                 }
             }
-
         }
-        var attackDelayCorutine = StartCoroutine(CalculatingAttackDelay());
         return 0;
     }
 
