@@ -245,6 +245,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 754222412818661548, guid: afec5ce95eb768c46b5d54bc80348d55, type: 3}
+      propertyPath: Speed
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 754222412818661548, guid: afec5ce95eb768c46b5d54bc80348d55, type: 3}
       propertyPath: Target
       value: 
       objectReference: {fileID: 439513757}
@@ -291,6 +295,22 @@ PrefabInstance:
     - target: {fileID: 2271039835269220160, guid: afec5ce95eb768c46b5d54bc80348d55, type: 3}
       propertyPath: m_Name
       value: TestEnemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 6028829047854351893, guid: afec5ce95eb768c46b5d54bc80348d55, type: 3}
+      propertyPath: Armor
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6028829047854351893, guid: afec5ce95eb768c46b5d54bc80348d55, type: 3}
+      propertyPath: Health
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 6028829047854351893, guid: afec5ce95eb768c46b5d54bc80348d55, type: 3}
+      propertyPath: AttackDelay
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6028829047854351893, guid: afec5ce95eb768c46b5d54bc80348d55, type: 3}
+      propertyPath: CurrentHealth
+      value: 100
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -353,6 +373,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -90
       objectReference: {fileID: 0}
+    - target: {fileID: 4107956621637240020, guid: 97c84c7127b1e461397dc1bbbc5458ec, type: 3}
+      propertyPath: _bulletTemplate
+      value: 
+      objectReference: {fileID: 5578385567996847730, guid: 05f6027d56e75417e8b13f4e72d12d2a, type: 3}
     - target: {fileID: 7004572631542367867, guid: 97c84c7127b1e461397dc1bbbc5458ec, type: 3}
       propertyPath: m_Name
       value: Gun
@@ -374,6 +398,14 @@ PrefabInstance:
       propertyPath: _weapon
       value: 
       objectReference: {fileID: 1161103637}
+    - target: {fileID: 443031327715323520, guid: 600606a0063ebab4b88b05a1ac75c217, type: 3}
+      propertyPath: _attackDelay
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 443031327715323520, guid: 600606a0063ebab4b88b05a1ac75c217, type: 3}
+      propertyPath: _healthPoints
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 2905108002136843246, guid: 600606a0063ebab4b88b05a1ac75c217, type: 3}
       propertyPath: m_LocalPosition.x
       value: -4.47

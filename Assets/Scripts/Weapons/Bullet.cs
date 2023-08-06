@@ -10,17 +10,21 @@ public class Bullet : MonoBehaviour
 
     private float _flyTime = 0;
 
+    private void Update()
+    {
+        Debug.Log(transform.position);
+    }
+
     public void FlyLive()
     {
         StartCoroutine(Fly());
-        Destroy(gameObject);
     }
 
     private IEnumerator Fly()
     {
         while (Physics2D.RaycastAll(transform.position, transform.up).Length == 0 && _flyTime < 10)
         {
-            transform.position += new Vector3(0, _speed, 0);
+            transform.position += transform.up * _speed * Time.deltaTime * -1;
             _flyTime += Time.deltaTime;
             yield return null;
         }
@@ -32,6 +36,8 @@ public class Bullet : MonoBehaviour
                 Attack(liver);
             }
         }
+
+        Destroy(gameObject);
     }
 
     private void Attack(IDamageable liver)
