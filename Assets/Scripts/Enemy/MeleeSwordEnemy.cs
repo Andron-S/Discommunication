@@ -9,8 +9,8 @@ public class MeleeSwordEnemy : Enemy
     {
         base.Start();
 
-        Health = 100;
-        Armor = 50;
+       // Health = 100;
+       // Armor = 50;
     }
 
     public override void Attack()
