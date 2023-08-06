@@ -4,6 +4,6 @@ using UnityEngine;
 
 public interface IAttackable 
 {
-    public void Attack();
+    public void AttackWeapon();
     public IEnumerator CalculatingAttackDelay();
 }

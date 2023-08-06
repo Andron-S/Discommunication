@@ -22,6 +22,6 @@ public abstract class Enemy : MonoBehaviour, IDamageable, IAttackable
 
     public abstract void TakeDamage(float damage);
     public abstract void Die();
-    public abstract void Attack();
+    public abstract void AttackWeapon();
     public abstract IEnumerator CalculatingAttackDelay();
 }
