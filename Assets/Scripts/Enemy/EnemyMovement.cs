@@ -16,7 +16,7 @@ namespace Assets.Enemy
             Rigidbody2D = GetComponent<Rigidbody2D>();
             Target = FindObjectOfType<Player>().transform;
 
-            Speed = Random.Range(5, 10);
+            //Speed = Random.Range(5, 10);
         }
 
         private void FixedUpdate()
