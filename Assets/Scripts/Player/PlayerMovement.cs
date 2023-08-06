@@ -18,6 +18,8 @@ public class PlayerMovement : PlayerControl
     private Vector2 _direction;
     private Vector2 _move;
     private Vector2 _mousePosition;
+    private float _rotationThreshold;
+
 
     public static event Action<Vector2> OnRotated;
 
@@ -36,6 +38,7 @@ public class PlayerMovement : PlayerControl
     {
         _speed = 7;
         _rigidbody2D.gravityScale = 0;
+        _rotationThreshold = 0.1f;
 
         OnRotated?.Invoke(_mousePosition);
     }
@@ -44,8 +47,8 @@ public class PlayerMovement : PlayerControl
     {
         GetDirection();
         Move();
-        FaceOnMousePointer();
-        //Rotate();
+        //FaceOnMousePointer();
+        Rotate();
     }
 
     public float Speed { get => _speed; set => _speed = value; }
@@ -71,7 +74,7 @@ public class PlayerMovement : PlayerControl
         float angle = Mathf.Atan2(-facindDirection.x, facindDirection.y) * Mathf.Rad2Deg;
         _rigidbody2D.MoveRotation(angle);
 
-        if(_rigidbody2D.rotation != angle)
+        if (_rigidbody2D.rotation != angle)
         {
             OnRotated?.Invoke(facindDirection.normalized);
         }

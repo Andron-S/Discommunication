@@ -5,13 +5,13 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Player : MonoBehaviour, IAttackable, IDamageable, IItemCollector
+public class Player : MonoBehaviour, IAttackable, IDamageable
 {
     [SerializeField] private float _healthPoints;
     [SerializeField] private float _reducingHealthPointsDelay;
     [SerializeField] private float _reducingHealthPointsDamage;
     [SerializeField] private float _attackDelay;
-    [SerializeField] private Weapon _weapon;
+    [SerializeField] private WeaponContainer _weapon;
     [SerializeField] private Image _healthBar;
     [SerializeField] private EatAbility _eatAbility;
 
@@ -37,11 +37,10 @@ public class Player : MonoBehaviour, IAttackable, IDamageable, IItemCollector
         reducingHealthPointsCorutine = StartCoroutine(ReducingHealthPoints());
 
         _personalMeleeWeapon = GetComponentInChildren<Weapon>();
-        //_personalMeleeWeapon.SetDurable(50000);
+        _personalMeleeWeapon.SetDurable(50000);
 
         _weaponHand = GetComponentInChildren<WeaponHand>();
 
-        CreateWeapon();
     }
 
     public void EatAbility()
@@ -56,7 +55,7 @@ public class Player : MonoBehaviour, IAttackable, IDamageable, IItemCollector
             return;
         }
 
-        _weapon.Attack();
+        _weapon.TryAttack();
     }
 
     public void AttackMelee()
@@ -115,14 +114,6 @@ public class Player : MonoBehaviour, IAttackable, IDamageable, IItemCollector
         Destroy(weapon);
     }
 
-    public void GetWeapon(Weapon weapon)
-    {
-        _weapon = weapon;
-        _weapon.transform.position = _weaponHand.transform.position;
-        _weapon.transform.SetParent(_weaponHand.transform);
-        // Get Weapon from died Enemy
-    }
-
     private IEnumerator ReducingHealthPoints()
     {
         while (_healthPoints > 0)
@@ -132,23 +123,5 @@ public class Player : MonoBehaviour, IAttackable, IDamageable, IItemCollector
         }
 
         Die();
-    }
-
-    private void CreateWeapon()
-    {
-        Weapon weapon = Instantiate(_weapon, _weaponHand.transform.position, transform.rotation, gameObject.transform);
-       // weapon.transform.right = _weaponHand.transform.up;
-        _weapon = weapon;
-    }
-
-    public bool TryCollectItem(ItemSO itemData)
-    {
-        itemData.OnCollected(this);
-        return true;
-    }
-
-    public GameObject GetCollectorObject()
-    {
-        return gameObject;
     }
 }
