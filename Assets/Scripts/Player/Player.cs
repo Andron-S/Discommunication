@@ -111,7 +111,6 @@ public class Player : MonoBehaviour, IAttackable, IDamageable
         while(_healthPoints > 0)
         {
             _healthPoints -= _reducingHealthPointsDamage;
-            Debug.Log(_healthPoints);
             yield return new WaitForSeconds(_reducingHealthPointsDelay);
         }
 

@@ -1,8 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Experimental.AI;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Rigidbody2D), typeof(Collider2D))]
@@ -14,6 +16,8 @@ public class PlayerMovement : PlayerControl
     private Transform _transform;
     private Vector2 _direction;
     private Vector2 _move;
+
+    public static event Action<Vector2> OnRotated;
 
     public override void Awake()
     {
@@ -29,6 +33,8 @@ public class PlayerMovement : PlayerControl
     {
         _speed = 7;
         _rigidbody2D.gravityScale = 0;
+
+        OnRotated?.Invoke(_move);
     }
 
     private void FixedUpdate()
@@ -47,7 +53,15 @@ public class PlayerMovement : PlayerControl
 
     private void Move()
     {
-        _move = new Vector2(_direction.x, _direction.y);
+        var newDirection = new Vector2(_direction.x, _direction.y);
+
+        if (_move != newDirection)
+        {
+            OnRotated?.Invoke(_move);
+        }
+
+        _move = newDirection;
+
         float scaledMoveSpeed = _speed * Time.fixedDeltaTime;
 
         _rigidbody2D.MovePosition(_rigidbody2D.position + _move * scaledMoveSpeed);
