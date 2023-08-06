@@ -33,6 +33,11 @@ public class EatAbility : MonoBehaviour
         _ignoredLayer = gameObject.transform.parent.gameObject.layer;
     }
 
+    private void Update()
+    {
+        Debug.DrawRay(_activatePoint.position, _currentPlayerDirection * _range);
+    }
+
     public int TryEat()
     {
         if (_isActivateRecharged == false)
